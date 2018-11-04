@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     IMAGE_TAG: "latest"
-    QUBECONFIG: "/root/kubeconfig.demoeks-cluster.yaml"
 phases:
   install:
     commands:
