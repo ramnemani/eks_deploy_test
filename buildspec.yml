@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     IMAGE_TAG: "latest"
+    QUBECONFIG: "/root/kubeconfig.demoeks-cluster.yaml"
 phases:
   install:
     commands:
@@ -12,15 +13,15 @@ phases:
     commands:
       - echo Logging in to Amazon ECR…
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo $KUBECONFIG 
+      - echo $QUBECONFIG 
       - echo $AWS_ACCOUNT_ID
       - echo $AWS_DEFAULT_REGION
       - echo $IMAGE_REPO_NAME
       - echo $IMAGE_TAG
   build:
     commands:
-      - kubectl run demo-app --image= $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG --port=8080 --kubeconfig=$KUBECONFIG
-      - kubectl expose deployment demo-app --type=LoadBalancer --port=8080 --target-port=8080 --kubeconfig=$KUBECONFIG 
+      - kubectl run demo-app --image= $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG --port=8080 --kubeconfig=$QUBECONFIG
+      - kubectl expose deployment demo-app --type=LoadBalancer --port=8080 --target-port=8080 --kubeconfig=$QUBECONFIG 
       - kubectl get svc
       - kubectl describe services demo-app
       - kubectl get pods
