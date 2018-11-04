@@ -21,7 +21,6 @@ phases:
   build:
     commands:
 ##      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - kubectl run demo-app --image= $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG --port=8080 --kubeconfig=$QUBECONFIG
       - kubectl run demo-app --image=337226440425.dkr.ecr.us-west-2.amazonaws.com/rkn_container1:latest --port=8080 --kubeconfig=$QUBECONFIG
       - kubectl expose deployment demo-app --type=LoadBalancer --port=8080 --target-port=8080 --kubeconfig=$QUBECONFIG 
       - kubectl get svc
